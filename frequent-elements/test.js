@@ -25,12 +25,16 @@ const topKFrequent1 = function(nums, k) {
 }
 
 const topKFrequent2 = function(nums, k) {
-  const map = {};
+  let map = {};
   let i = nums.length;
   let n;
-  while(i--) {
-    n = nums[i];
-    map[n] = map[n] ? map[n] + 1 : 1
+  while(i) {
+    n = nums[--i];
+    if(map[n]) {
+      map[n]++;
+    } else {
+      map[n] = 1;
+    }
   }
 
   let freq = {};
@@ -50,12 +54,11 @@ const topKFrequent2 = function(nums, k) {
   }
 
   let result = new Array(k);
-  let j = 0;
 
   keys = Object.keys(freq);
   i = keys.length;
   let arr;
-
+  let j;
   while(k && i) {
     arr = freq[keys[--i]];
     let len = arr.length;
